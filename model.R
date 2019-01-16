@@ -131,6 +131,6 @@ lpb <- obj$env$last.par.best
 pl <- obj$env$parList(par=lpb)
 dim(pl$eta)
 length(pl$eta_static)
-I <- colMeans(exp(t(t(pl$eta + pl$eta_static) + pl$beta[1:nlevels(d$Year)])))
+I <- colMeans(sqrt(exp(t(t(pl$eta + pl$eta_static) + pl$beta[1:nlevels(d$Year)]))))
 
 summary(sdr, "report")

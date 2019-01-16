@@ -73,18 +73,16 @@ Type objective_function<Type>::operator() ()
   nll += lfactorial(N).sum();
 
   // REPORT
-  vector<Type> index(NLEVELS(time));
-  index.setZero();
+  vector<Type> sqrtindex(NLEVELS(time));
+  sqrtindex.setZero();
   for(int j=0; j<eta.cols(); j++) {
     for(int i=0; i<eta.rows(); i++) {
-      index(j) += exp( eta(i, j) + eta_static(i) + beta[j] );
+      sqrtindex(j) += sqrt( exp( eta(i, j) + eta_static(i) + beta[j] ) );
     }
-    index(j) /= eta.rows();
+    sqrtindex(j) /= eta.rows();
   }
-  ADREPORT(index);
-  ADREPORT(sqrt(index));
-  REPORT(index);
-  REPORT(sqrt(index));
+  ADREPORT(sqrtindex);
+  REPORT(sqrtindex);
 
   Type T = -1./log(phi_time);
   ADREPORT(T);
