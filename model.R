@@ -134,3 +134,8 @@ length(pl$eta_static)
 I <- colMeans(sqrt(exp(t(t(pl$eta + pl$eta_static) + pl$beta[1:nlevels(d$Year)]))))
 
 summary(sdr, "report")
+
+est <- as.list(sdr, "Estimate")
+std <- as.list(sdr, "Std. Error")
+## Fixed effects
+data.frame(Parameter=colnames(A), Estimate=est$beta, Std.Error=std$beta)
