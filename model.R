@@ -139,3 +139,14 @@ est <- as.list(sdr, "Estimate")
 std <- as.list(sdr, "Std. Error")
 ## Fixed effects
 data.frame(Parameter=colnames(A), Estimate=est$beta, Std.Error=std$beta)
+
+## Variance (Nugget)
+exp(est$logsigma)^2
+
+## Variance (YS)
+Q <- Q0 + exp(est$logdelta) * I
+exp(est$logkappa)^2 * mean(diag(TMB:::solveSubset(Q)))
+
+## Variance (IS)
+Q <- Q0 + exp(est$logdelta) * I
+exp(est$logkappa_static)^2 * mean(diag(TMB:::solveSubset(Q)))
